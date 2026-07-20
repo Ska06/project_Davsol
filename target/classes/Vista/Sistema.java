@@ -15,8 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
-
+import javax.swing.JOptionPane;
+import Reportes.FacturaPDF;
 
 /**
  *
@@ -93,12 +93,13 @@ public class Sistema extends javax.swing.JFrame {
         btn_deleteVenta = new javax.swing.JButton();
         txtF_ruc = new javax.swing.JTextField();
         txtF_nombre = new javax.swing.JTextField();
-        btn_desFactura = new javax.swing.JButton();
+        btn_RegistroFactura = new javax.swing.JButton();
         txt_total = new javax.swing.JLabel();
         txtF_total = new javax.swing.JTextField();
         btn_agregarVenta = new javax.swing.JButton();
         cbox_producto1 = new javax.swing.JComboBox<>();
         btn_buscarProductRV = new javax.swing.JButton();
+        btn_GenerarFactura = new javax.swing.JButton();
         Cliente = new javax.swing.JPanel();
         txt_dni = new javax.swing.JLabel();
         txt_name = new javax.swing.JLabel();
@@ -142,11 +143,11 @@ public class Sistema extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 127));
+        jPanel1.setBackground(new java.awt.Color(71, 83, 123));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo (1).jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 90));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 110, 100));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Cliente");
@@ -191,7 +192,7 @@ public class Sistema extends javax.swing.JFrame {
 
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
-        txt_producto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_producto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txt_producto.setText("Producto");
 
         txt_cantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -282,12 +283,12 @@ public class Sistema extends javax.swing.JFrame {
             }
         });
 
-        btn_desFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/descargar (2).png"))); // NOI18N
-        btn_desFactura.setText("FACTURA");
-        btn_desFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_desFactura.addActionListener(new java.awt.event.ActionListener() {
+        btn_RegistroFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/descargar (2).png"))); // NOI18N
+        btn_RegistroFactura.setText("REGISTRAR VENTA");
+        btn_RegistroFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_RegistroFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_desFacturaActionPerformed(evt);
+                btn_RegistroFacturaActionPerformed(evt);
             }
         });
 
@@ -321,58 +322,68 @@ public class Sistema extends javax.swing.JFrame {
             }
         });
 
+        btn_GenerarFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/descargar (2).png"))); // NOI18N
+        btn_GenerarFactura.setText("GENERAR FACTURA");
+        btn_GenerarFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_GenerarFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_GenerarFacturaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout RegistroVentaLayout = new javax.swing.GroupLayout(RegistroVenta);
         RegistroVenta.setLayout(RegistroVentaLayout);
         RegistroVentaLayout.setHorizontalGroup(
             RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RegistroVentaLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(RegistroVentaLayout.createSequentialGroup()
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_producto)
-                            .addComponent(cbox_producto1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_buscarProductRV)
+                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtF_ruc, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_nombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtF_nombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_cantidad)
-                            .addComponent(txtF_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_precio)
-                            .addComponent(txtF_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_stockDis)
-                            .addComponent(txtF_stockDis, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn_agregarVenta)
-                            .addComponent(btn_deleteVenta))
-                        .addGap(69, 69, 69))
-                    .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_RegistroFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(140, 140, 140)
+                        .addComponent(btn_GenerarFactura))
+                    .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(RegistroVentaLayout.createSequentialGroup()
                             .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtF_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txt_ruc))
-                            .addGap(60, 60, 60)
+                                .addComponent(txt_producto)
+                                .addComponent(cbox_producto1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btn_buscarProductRV)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtF_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(54, 54, 54)
-                            .addComponent(btn_desFactura)
-                            .addGap(55, 55, 55)
+                                .addComponent(txt_cantidad)
+                                .addComponent(txtF_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(36, 36, 36)
+                            .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_precio)
+                                .addComponent(txtF_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(49, 49, 49)
+                            .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_stockDis)
+                                .addComponent(txtF_stockDis, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btn_agregarVenta)
+                                .addComponent(btn_deleteVenta))
+                            .addGap(69, 69, 69))
+                        .addGroup(RegistroVentaLayout.createSequentialGroup()
+                            .addComponent(txt_ruc)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(txtF_total, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtF_total, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(369, Short.MAX_VALUE))
         );
         RegistroVentaLayout.setVerticalGroup(
             RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RegistroVentaLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(RegistroVentaLayout.createSequentialGroup()
                         .addComponent(btn_deleteVenta)
@@ -397,40 +408,41 @@ public class Sistema extends javax.swing.JFrame {
                                     .addComponent(txtF_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtF_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtF_stockDis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84)
-                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_ruc)
+                    .addComponent(txtF_total, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_total))
+                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(RegistroVentaLayout.createSequentialGroup()
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_ruc)
-                            .addComponent(txt_nombre))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtF_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(txt_nombre)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtF_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(RegistroVentaLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
                         .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtF_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtF_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(RegistroVentaLayout.createSequentialGroup()
-                            .addGap(19, 19, 19)
-                            .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txt_total)
-                                .addComponent(txtF_total, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(btn_desFactura)))
-                .addContainerGap(219, Short.MAX_VALUE))
+                            .addComponent(btn_GenerarFactura)
+                            .addComponent(btn_RegistroFactura))))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registro Venta", RegistroVenta);
 
-        txt_dni.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_dni.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_dni.setText("DNI/RUC:");
 
         txt_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_name.setText("NOMBRE:");
 
-        txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_telefono.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_telefono.setText("TELEFONO:");
 
-        txt_correo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_correo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_correo.setText("CORREO:");
 
         btn_agregar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -548,7 +560,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(btn_agregar)
                             .addComponent(btn_actualizar)
                             .addComponent(btn_eliminar))))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cliente", Cliente);
@@ -648,7 +660,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(txtF_precioProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addContainerGap(355, Short.MAX_VALUE))
         );
         ProductosLayout.setVerticalGroup(
             ProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,7 +686,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(btn_registrarProduct)
                             .addComponent(btn_actualizarProduct)
                             .addComponent(btn_eliminarProduct))))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Productos", Productos);
@@ -761,7 +773,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(txtF_cantidadInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addContainerGap(355, Short.MAX_VALUE))
         );
         InventarioLayout.setVerticalGroup(
             InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -789,7 +801,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(txtF_cantidadInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(btn_procesarMovimiento)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(273, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Inventario", Inventario);
@@ -842,10 +854,10 @@ public class Sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtF_totalActionPerformed
 
-    private void btn_desFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_desFacturaActionPerformed
+    private void btn_RegistroFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegistroFacturaActionPerformed
         ventaController.ProcesarVentaCompleta();
        
-    }//GEN-LAST:event_btn_desFacturaActionPerformed
+    }//GEN-LAST:event_btn_RegistroFacturaActionPerformed
 
     private void txtF_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtF_nombreActionPerformed
         // TODO add your handling code here:
@@ -936,6 +948,37 @@ public class Sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtF_rucActionPerformed
 
+    private void btn_GenerarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GenerarFacturaActionPerformed
+
+    try {
+
+        int idVenta =
+                (int)(System.currentTimeMillis() % 100000);
+
+        FacturaPDF.generarFactura(
+
+                idVenta,
+
+                txtF_nombre.getText(),
+
+                txtF_ruc.getText(),
+
+                t_regVent,
+
+                Double.parseDouble(
+                        txtF_total.getText())
+
+        );
+
+    } catch (Exception e) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                e.getMessage());
+
+    }
+    }//GEN-LAST:event_btn_GenerarFacturaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -976,6 +1019,8 @@ public class Sistema extends javax.swing.JFrame {
     public javax.swing.JPanel Inventario;
     public javax.swing.JPanel Productos;
     public javax.swing.JPanel RegistroVenta;
+    private javax.swing.JButton btn_GenerarFactura;
+    public javax.swing.JButton btn_RegistroFactura;
     public javax.swing.JButton btn_actualizar;
     public javax.swing.JButton btn_actualizarProduct;
     public javax.swing.JButton btn_agregar;
@@ -983,7 +1028,6 @@ public class Sistema extends javax.swing.JFrame {
     public javax.swing.JButton btn_buscarProduct;
     public javax.swing.JButton btn_buscarProductRV;
     public javax.swing.JButton btn_deleteVenta;
-    public javax.swing.JButton btn_desFactura;
     public javax.swing.JButton btn_eliminar;
     public javax.swing.JButton btn_eliminarProduct;
     public javax.swing.JButton btn_procesarMovimiento;

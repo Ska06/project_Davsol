@@ -17,11 +17,21 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        setSize(930, 420);
+try {
+            javax.swing.ImageIcon iconoOriginal = (javax.swing.ImageIcon) jLabel1.getIcon();
+            if (iconoOriginal != null) {
+                java.awt.Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(510, 420, java.awt.Image.SCALE_SMOOTH);
+                jLabel1.setIcon(new javax.swing.ImageIcon(imagenEscalada));
+            }
+        } catch (Exception e) {
+            System.err.println("No se pudo escalar la imagen: " + e.getMessage());
+        }
+        
+        // 2. Le damos el tamaño real a la ventana (950 ancho x 460 alto) para que no se corte el borde derecho
+        setSize(950, 460);
         setResizable(false);
-        setTitle("Dabsol Eco Systems");
-        setLocationRelativeTo(null);
-        this.repaint();
+        setTitle("Davsol Eco Systems");
+        setLocationRelativeTo(null); // Centra la ventana en tu monitor
     }
 
     /**
@@ -31,7 +41,6 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -39,48 +48,50 @@ public class Login extends javax.swing.JFrame {
         txt_username = new javax.swing.JTextField();
         txt_password = new javax.swing.JPasswordField();
         btn_enter = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Logo.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 0, 515, 420));
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(170, 180, 208));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setText("INICIAR SESION");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 25, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("USUARIO:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 116, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("CONTRASEÑA:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 187, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
 
         txt_username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_username.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txt_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_usernameActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 151, 220, 30));
+        jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 220, 30));
 
         txt_password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txt_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_passwordActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 222, 220, 30));
+        jPanel1.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 220, 30));
 
-        btn_enter.setBackground(new java.awt.Color(0, 0, 0));
+        btn_enter.setBackground(new java.awt.Color(16, 67, 119));
         btn_enter.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_enter.setForeground(new java.awt.Color(255, 255, 255));
         btn_enter.setText("Acceso");
@@ -90,9 +101,12 @@ public class Login extends javax.swing.JFrame {
                 btn_enterActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_enter, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 100, 30));
+        jPanel1.add(btn_enter, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 100, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 415, 420));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 420));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Logo.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 510, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,11 +126,23 @@ public class Login extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Ingrese usuario y contraseña.", "Dabsol Eco Systems", javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
-        // TODO: validate against DB (Usuario/Autenticar) when you have UsuarioDAO
-        this.setVisible(false);
-        this.dispose();
-        Sistema sistema = new Sistema();
-        sistema.setVisible(true);
+       try {
+            // 1. Primero intentamos crear y mostrar el Sistema
+            Sistema sistema = new Sistema();
+            sistema.setVisible(true);
+            
+            // 2. Si el sistema abrió con éxito, recién ahí cerramos el Login
+            this.dispose();
+            
+        } catch (Exception e) {
+            // Si el Sistema tiene un error dentro (imágenes, BD, etc.), esto nos avisará qué pasó
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "El Login es correcto, pero no se pudo abrir Sistema.java.\nError: " + e.toString(), 
+                "Error en Sistema", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace(); // Muestra el reporte detallado en la consola de NetBeans
+        }
+    
     }//GEN-LAST:event_btn_enterActionPerformed
 
     /**

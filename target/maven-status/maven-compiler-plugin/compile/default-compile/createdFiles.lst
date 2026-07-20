@@ -8,6 +8,7 @@ Modelo\MovimientoAlmacen.class
 Controlador\ProductoController.class
 Vista\Sistema$12.class
 Vista\Sistema$22.class
+Vista\Sistema$32.class
 Vista\Sistema$1.class
 Vista\Sistema$25.class
 Controlador\ClienteController.class
@@ -31,6 +32,7 @@ Controlador\VentaController.class
 Modelo\DetalleVenta.class
 Vista\Sistema$14.class
 Vista\Sistema$24.class
+Reportes\FacturaPDF.class
 Vista\Sistema$18.class
 Vista\Sistema$28.class
 Modelo\Cliente.class
