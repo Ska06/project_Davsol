@@ -69,68 +69,6 @@ public class InventarioController {
         
     }
 
-    /*public void procesarMovimiento() {
-
-        try {
-
-            // 1️⃣ Obtener datos desde vista
-            int idProducto = obtenerIdProductoSeleccionado();
-            String tipo = vista.cbox_movimiento.getSelectedItem().toString();
-            int cantidad = Integer.parseInt(vista.txtF_cantidadInventario.getText());
-
-            if (cantidad <= 0) {
-                JOptionPane.showMessageDialog(null, "Cantidad inválida");
-                return;
-            }
-
-            Connection con = ConnectionMySQL.getConexion();
-            con.setAutoCommit(false);
-
-            try {
-
-                // 2️⃣ Obtener stock actual
-                int stockActual = inventarioDAO.obtenerStockActual(con, idProducto);
-                int nuevoStock = stockActual;
-
-                if (tipo.equalsIgnoreCase("Entrada")) {
-                    nuevoStock += cantidad;
-
-                } else if (tipo.equalsIgnoreCase("Salida")) {
-
-                    if (stockActual < cantidad) {
-                        JOptionPane.showMessageDialog(null, "Stock insuficiente");
-                        con.rollback();
-                        return;
-                    }
-
-                    nuevoStock -= cantidad;
-                }
-
-                // 3️⃣ Actualizar inventario
-                inventarioDAO.actualizarStockConConexion(con, idProducto, nuevoStock);
-
-                // 4️⃣ Registrar movimiento
-                movimientoDAO.insertarConConexion(con, idProducto, tipo, cantidad);
-
-                con.commit();
-
-                // 5️⃣ Actualizar vista
-                vista.txtF_stock.setText(String.valueOf(nuevoStock));
-                JOptionPane.showMessageDialog(null, "Movimiento realizado correctamente");
-
-            } catch (Exception e) {
-                con.rollback();
-                JOptionPane.showMessageDialog(null, "Error al procesar movimiento");
-            } finally {
-                con.close();
-            }
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Ingrese una cantidad válida");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error inesperado");
-        }
-    }*/
     public void procesarMovimiento() {
 
         Connection con = null;
@@ -158,10 +96,37 @@ public class InventarioController {
             Inventario inv = inventarioDAO.obtenerPorProductoConConexion(con, p.getIdproducto());
 
             if (inv == null) {
-                JOptionPane.showMessageDialog(null, "No existe inventario para este producto");
-                con.rollback();
-                return;
-            }
+
+    if(tipo.equals("ENTRADA")){
+
+        inventarioDAO.crearInventario(con, p.getIdproducto(), cantidad);
+
+        int idInventario = inventarioDAO.obtenerIdInventario(con, p.getIdproducto());
+
+        movimientoDAO.insertarConConexion(con, idInventario, "ENTRADA", cantidad);
+
+        con.commit();
+
+        vista.txtF_stock.setText(String.valueOf(cantidad));
+        vista.txtF_cantidadInventario.setText("");
+
+        listarMovimientos();
+
+        JOptionPane.showMessageDialog(null,
+                "Inventario creado correctamente");
+
+        return;
+
+    }else{
+
+        JOptionPane.showMessageDialog(null,
+                "No existe inventario para este producto");
+
+        con.rollback();
+        return;
+    }
+
+}
 
             int stockActual = inv.getStockActual();
             int nuevoStock;

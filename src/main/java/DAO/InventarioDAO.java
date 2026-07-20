@@ -159,7 +159,17 @@ public class InventarioDAO {
             ps.executeUpdate();
         }
     }
-    
+    public void crearInventario(Connection con, int idProducto, int stock) throws SQLException {
+
+    String sql = "INSERT INTO inventario(id_producto, stock_actual) VALUES(?,?)";
+
+    PreparedStatement ps = con.prepareStatement(sql);
+
+    ps.setInt(1, idProducto);
+    ps.setInt(2, stock);
+
+    ps.executeUpdate();
+}
     
     
 }
